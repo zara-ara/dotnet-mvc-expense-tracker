@@ -1,85 +1,77 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using YourApp.Models;
+using nyobaa.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YourApp.Controllers
+namespace nyobaa.Controllers
 {
     public class KategoriController : Controller
     {
-        // Simulasi database (dummy data)
-        private static List<Kategori> _kategoris = new List<Kategori>
+        // sementara pakai static list (dummy)
+        private static List<Kategori> data = new List<Kategori>
         {
-            new Kategori { Id = 1, Tipe = "Income", Nama = "Gaji", Deskripsi = "Pendapatan bulanan", Status = "Active" },
-            new Kategori { Id = 2, Tipe = "Expense", Nama = "Makan", Deskripsi = "Biaya makan", Status = "Active" }
+            new Kategori { Id = 1, Tipe="Income", Nama="Gaji", Deskripsi="Pendapatan bulanan", Status="Active"},
+            new Kategori { Id = 2, Tipe="Expense", Nama="Makan", Deskripsi="Biaya makan", Status="Active"}
         };
 
-        // GET: Kategori
         public IActionResult Index()
         {
-            return View(_kategoris);
+            return View(data);
         }
 
-        // GET: Kategori/Create
+        public IActionResult Details(int id)
+        {
+            var kategori = data.FirstOrDefault(x => x.Id == id);
+            return View(kategori);
+        }
+
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Kategori/Create
         [HttpPost]
-        public IActionResult Create(Kategori kategori)
+        public IActionResult Create(Kategori model)
         {
-            kategori.Id = _kategoris.Max(x => x.Id) + 1;
-            _kategoris.Add(kategori);
+            model.Id = data.Max(x => x.Id) + 1;
+            data.Add(model);
             return RedirectToAction("Index");
         }
 
-        // GET: Kategori/Edit/5
         public IActionResult Edit(int id)
         {
-            var kategori = _kategoris.FirstOrDefault(x => x.Id == id);
-            if (kategori == null) return NotFound();
+            var kategori = data.FirstOrDefault(x => x.Id == id);
             return View(kategori);
         }
 
-        // POST: Kategori/Edit/5
         [HttpPost]
-        public IActionResult Edit(Kategori kategori)
+        public IActionResult Edit(Kategori model)
         {
-            var data = _kategoris.FirstOrDefault(x => x.Id == kategori.Id);
-            if (data != null)
+            var kategori = data.FirstOrDefault(x => x.Id == model.Id);
+            if (kategori != null)
             {
-                data.Tipe = kategori.Tipe;
-                data.Nama = kategori.Nama;
-                data.Deskripsi = kategori.Deskripsi;
-                data.Status = kategori.Status;
+                kategori.Tipe = model.Tipe;
+                kategori.Nama = model.Nama;
+                kategori.Deskripsi = model.Deskripsi;
+                kategori.Status = model.Status;
             }
             return RedirectToAction("Index");
         }
 
-        // GET: Kategori/Details/5
-        public IActionResult Details(int id)
-        {
-            var kategori = _kategoris.FirstOrDefault(x => x.Id == id);
-            if (kategori == null) return NotFound();
-            return View(kategori);
-        }
-
-        // GET: Kategori/Delete/5
         public IActionResult Delete(int id)
         {
-            var kategori = _kategoris.FirstOrDefault(x => x.Id == id);
-            if (kategori == null) return NotFound();
+            var kategori = data.FirstOrDefault(x => x.Id == id);
             return View(kategori);
         }
 
-        // POST: Kategori/DeleteConfirmed
-        [HttpPost, ActionName("DeleteConfirmed")]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var kategori = _kategoris.FirstOrDefault(x => x.Id == id);
-            if (kategori != null) _kategoris.Remove(kategori);
+            var kategori = data.FirstOrDefault(x => x.Id == id);
+            if (kategori != null)
+            {
+                data.Remove(kategori);
+            }
             return RedirectToAction("Index");
         }
     }

@@ -1,46 +1,37 @@
-﻿@model YourApp.Models.Kategori
+﻿@model nyobaa.Models.Kategori
 @{
-    ViewData["Title"] = "Edit Kategori";
+    ViewData["Title"] = "Update Kategori";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="content-header">
-    <h1>Edit Kategori</h1>
-</section>
+<div class="container col-md-6">
+    <h2 class="mb-3">Edit Kategori</h2>
 
-<section class="content">
-    <div class="card card-warning">
-        <form asp-action="Edit" method="post">
-            <div class="card-body">
-                <input type="hidden" asp-for="Id" />
-
-                <div class="form-group">
-                    <label>Tipe</label>
-                    <select class="form-control" asp-for="Tipe">
-                        <option value="Income" selected="@(Model.Tipe == "Income")">Income</option>
-                        <option value="Expense" selected="@(Model.Tipe == "Expense")">Expense</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input asp-for="Nama" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Deskripsi</label>
-                    <textarea asp-for="Deskripsi" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" asp-for="Status">
-                        <option value="Active" selected="@(Model.Status == "Active")">Active</option>
-                        <option value="Not Active" selected="@(Model.Status == "Not Active")">Not Active</option>
-                    </select>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-warning">Update</button>
-                <a href="@Url.Action("Index")" class="btn btn-secondary">Kembali</a>
-            </div>
-        </form>
-    </div>
-</section>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label>Tipe</label>
+            <select asp-for="Tipe" class="form-control">
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nama</label>
+            <input asp-for="Nama" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea asp-for="Deskripsi" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            <select asp-for="Status" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Not Active">Not Active</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a asp-action="Index" class="btn btn-secondary">Kembali</a>
+    </form>
+</div>

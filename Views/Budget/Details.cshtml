@@ -1,0 +1,36 @@
+﻿@model nyobaa.Models.Budget
+
+@{
+    ViewData["Title"] = "Detail Budget";
+}
+
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Detail Budget</h3>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Kategori</dt>
+            <dd class="col-sm-9">@Model.Kategori?.Nama</dd>
+
+            <dt class="col-sm-3">Nama</dt>
+            <dd class="col-sm-9">@Model.Nama</dd>
+
+            <dt class="col-sm-3">Deskripsi</dt>
+            <dd class="col-sm-9">@Model.Deskripsi</dd>
+
+            <dt class="col-sm-3">Total Budget</dt>
+            <dd class="col-sm-9">@Model.TotalBudget.ToString("C")</dd>
+
+            <dt class="col-sm-3">Periode</dt>
+            <dd class="col-sm-9">@Model.StartDate.ToShortDateString() - @Model.EndDate.ToShortDateString()</dd>
+
+            <dt class="col-sm-3">Is Repeat?</dt>
+            <dd class="col-sm-9">@(Model.IsRepeat ? "Ya" : "Tidak")</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+        </dl>
+        <a asp-action="Index" class="btn btn-secondary">Kembali</a>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model nyobaa.Models.Budget
+
+@{
+    ViewData["Title"] = "Hapus Budget";
+}
+
+<div class="card card-danger">
+    <div class="card-header">
+        <h3 class="card-title">Hapus Budget</h3>
+    </div>
+    <div class="card-body">
+        <p>Apakah Anda yakin ingin menghapus budget ini?</p>
+        <dl class="row">
+            <dt class="col-sm-3">Nama</dt>
+            <dd class="col-sm-9">@Model.Nama</dd>
+
+            <dt class="col-sm-3">Kategori</dt>
+            <dd class="col-sm-9">@Model.Kategori?.Nama</dd>
+
+            <dt class="col-sm-3">Total Budget</dt>
+            <dd class="col-sm-9">@Model.TotalBudget.ToString("C")</dd>
+        </dl>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Hapus</button>
+            <a asp-action="Index" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</div>

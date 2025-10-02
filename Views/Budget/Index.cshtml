@@ -1,0 +1,69 @@
+﻿@model IEnumerable<nyobaa.Models.Budget>
+
+@{
+    ViewData["Title"] = "Daftar Budget";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Daftar Budget</h3>
+        <div class="card-tools">
+            <a asp-action="Create" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Tambah Budget
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th>Total Budget</th>
+                    <th>Periode</th>
+                    <th>Repeat?</th>
+                    <th>Status</th>
+                    <th style="width:200px;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Kategori?.Nama</td>
+                        <td>@item.Nama</td>
+                        <td>@item.Deskripsi</td>
+                        <td>@item.TotalBudget.ToString("C")</td>
+                        <td>@item.StartDate.ToShortDateString() - @item.EndDate.ToShortDateString()</td>
+                        <td>
+                            @if (item.IsRepeat)
+                            {
+                                <span class="badge badge-info">Ya</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary">Tidak</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Status == "Active")
+                            {
+                                <span class="badge badge-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary">Not Active</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Detail</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

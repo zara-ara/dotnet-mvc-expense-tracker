@@ -1,44 +1,36 @@
-﻿@model YourApp.Models.Kategori
+﻿@model nyobaa.Models.Kategori
 @{
     ViewData["Title"] = "Tambah Kategori";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="content-header">
-    <h1>Tambah Kategori</h1>
-</section>
+<div class="container col-md-6">
+    <h2 class="mb-3">Tambah Kategori</h2>
 
-<section class="content">
-    <div class="card card-primary">
-        <form asp-action="Create" method="post">
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Tipe</label>
-                    <select class="form-control" asp-for="Tipe">
-                        <option>Income</option>
-                        <option>Expense</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input asp-for="Nama" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label>Deskripsi</label>
-                    <textarea asp-for="Deskripsi" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" asp-for="Status">
-                        <option>Active</option>
-                        <option>Not Active</option>
-                    </select>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="@Url.Action("Index")" class="btn btn-secondary">Kembali</a>
-            </div>
-        </form>
-    </div>
-</section>
+    <form asp-action="Create">
+        <div class="form-group">
+            <label>Tipe</label>
+            <select asp-for="Tipe" class="form-control">
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nama</label>
+            <input asp-for="Nama" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea asp-for="Deskripsi" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            <select asp-for="Status" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Not Active">Not Active</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <a asp-action="Index" class="btn btn-secondary">Kembali</a>
+    </form>
+</div>

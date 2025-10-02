@@ -1,55 +1,45 @@
-﻿@model IEnumerable<YourApp.Models.Kategori>
+﻿@model IEnumerable<nyobaa.Models.Kategori>
 @{
     ViewData["Title"] = "Master Data Kategori";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="content-header">
-    <h1>Master Data Kategori</h1>
-</section>
+<div class="container-fluid">
+    <h2 class="mb-3">Master Data Kategori</h2>
+    <a class="btn btn-primary mb-3" asp-action="Create">Tambah Kategori</a>
 
-<section class="content">
-    <div class="card">
-        <div class="card-header">
-            <a class="btn btn-primary" href="@Url.Action("Create")">+ Tambah Kategori</a>
-        </div>
-        <div class="card-body">
-            <table id="kategoriTable" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipe</th>
-                        <th>Nama</th>
-                        <th>Deskripsi</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Tipe</td>
-                            <td>@item.Nama</td>
-                            <td>@item.Deskripsi</td>
-                            <td>@item.Status</td>
-                            <td>
-                                <a class="btn btn-info btn-sm" href="@Url.Action("Details", new { id = item.Id })">Detail</a>
-                                <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { id = item.Id })">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { id = item.Id })">Hapus</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+    <table id="kategoriTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tipe</th>
+                <th>Nama</th>
+                <th>Deskripsi</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Tipe</td>
+                    <td>@item.Nama</td>
+                    <td>@item.Deskripsi</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Lihat</a>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Hapus</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @section Scripts {
     <script>
-        $(function () {
+        $(document).ready(function () {
             $('#kategoriTable').DataTable();
         });
     </script>
